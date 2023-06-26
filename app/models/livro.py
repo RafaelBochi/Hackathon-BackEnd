@@ -12,4 +12,4 @@ class Livro(models.Model):
     genre = models.ForeignKey(Genero, on_delete=models.PROTECT)
 
     def __str__(self):
-        f"{self.title} - {self.price}"
+        return f"{self.title} - {self.price}"
