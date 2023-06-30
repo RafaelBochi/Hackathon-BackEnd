@@ -1,8 +1,8 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from .managers import CustomUserManager
 
 
@@ -30,3 +30,11 @@ class Usuario(AbstractUser):
         verbose_name = "Usuário"
         verbose_name_plural = "Usuários"
         ordering = ["-date_joined"]
+
+@receiver(post_save, sender=Usuario)
+def create_user_carrinho(sender, instance, created, **kwargs):
+    if created:
+        from app.models import Carrinho
+
+        Carrinho.objects.create(user=instance)
+        instance.groups.add(Group.objects.get(name="cliente"))

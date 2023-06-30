@@ -5,9 +5,9 @@ from .genero import Genero
 
 class Livro(models.Model):
     title = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    stock = models.IntegerField()
-    isbn = models.CharField(max_length=20)
+    price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    stock = models.IntegerField(blank=True, null=True)
+    isbn = models.CharField(max_length=20, blank=True, null=True)
     author = models.ForeignKey(Autor, on_delete=models.PROTECT)
     genre = models.ForeignKey(Genero, on_delete=models.PROTECT)
 

@@ -54,8 +54,6 @@ class CustomUserAdmin(UserAdmin):
                     "password2",
                     "is_staff",
                     "is_active",
-                    "groups",
-                    "user_permissions",
                 ),
             },
         ),
